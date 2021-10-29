@@ -1,9 +1,9 @@
 import './App.css';
 import React, {useState, useEffect} from "react";
 import Posts from "./components/Posts";
-import Comments from "./components/Comments";
 import Context from "./context";
 import ModalWindow from "./components/Modal/ModalWindow";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
     const [state, setState] = useState([
@@ -13,17 +13,11 @@ function App() {
         {id: 3, title: "Where does it come from?", page: 63, forWhom: 'adult', completed: false}
     ]);
 
-    const [comments, setComments] = useState([]);
     const [modal, setModal] = useState({isOpen: false});
 
     const [openModal, setOpenModal] = useState(false);
     const [itemData, setItemData] = useState({});
 
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/comments?_limit=5')
-            .then(response => response.json())
-            .then(comments => setComments(comments));
-    }, []);
 
     useEffect(() => {
         setModal(modal);
@@ -87,37 +81,47 @@ function App() {
 
     return (
         <Context.Provider value={{removePost, addPost, editPost}}>
-            <div className="container pt-3">
-                <div className="row">
-                    <div className="col-12">
-                        {/*<Modal title={modalTitle} modalShow={modal} component={ <PostForm onCreate={addPost} /> }/>*/}
-                        <button onClick={() => {
-                            openModalWindow({itemData})
-                        }} className="btn btn-success btn-lg pl-3 mb-5">Add new Post
-                        </button>
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-12 mb-3">
-                        <h2>Posts</h2>
-                        <Posts posts={state} completed={"false"} onToggle={togglePost}
-                               openModalWithItem={openModalWindow}/>
-                        <h4 className="mt-5">Archive Posts:</h4>
-                        <Posts posts={state} completed={"true"} onToggle={togglePost}
-                               openModalWithItem={openModalWindow}/>
-                        <h2 className="mt-5 mb-3">Comments</h2>
-                        <p className="text-black-50">https://jsonplaceholder.typicode.com/comments?_limit=5</p>
-                        <div className="">
-                            <Comments comments={comments}/>
+            <div className="page">
+                <Navbar/>
+
+                <div className="container pt-3">
+                    <div className="row">
+                        <div className="col-12">
+                            <div className="form">
+                                <div>
+                                    <button
+                                        onClick={() => {
+                                            openModalWindow({itemData})
+                                        }}
+                                        className="f-btn btn"
+                                    > +
+                                    </button>
+                                </div>
+                                <div className="f-title">
+                                    Add new post in list of Posts
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
+                    <div className="row">
+                        <div className="col-12 mb-3">
+                            <h2>Posts</h2>
+                            <Posts posts={state} completed={"false"} onToggle={togglePost}
+                                   openModalWithItem={openModalWindow}/>
+                            <h4 className="mt-5">Archive Posts:</h4>
+                            <Posts posts={state} completed={"true"} onToggle={togglePost}
+                                   openModalWithItem={openModalWindow}/>
+                        </div>
+                    </div>
+                    {<ModalWindow
+                        show={openModal}
+                        itemData={itemData}
+                        saveModal={addPost}
+                        closeModal={hideModal}
+                    />}
                 </div>
-                {<ModalWindow
-                    show={openModal}
-                    itemData={itemData}
-                    saveModal={addPost}
-                    closeModal={hideModal}
-                />}
             </div>
         </Context.Provider>
     );

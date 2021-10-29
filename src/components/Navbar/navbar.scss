@@ -1,0 +1,110 @@
+.header {
+  background-color: #373737;
+  padding: 0;
+  color: #ffffff;
+  position: fixed;
+  z-index: 10;
+  width: 100%;
+  top: 0;
+  left: 0;
+
+  .title {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  & .base {
+    width: 100%;
+    background-color: #373737;
+    position: relative;
+    z-index: 2;
+  }
+
+  & .h-container {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 20px 0;
+
+  }
+
+  & a {
+    color: #ffffff;
+    text-transform: uppercase;
+
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  .git-svg {
+    color: #ffffff;
+    display: inline-block;
+    margin-right: 10px;
+
+    & svg {
+      overflow: hidden;
+      vertical-align: middle;
+      color: #fff;
+      background: white;
+      border-radius: 10%;
+      padding: 1px;
+    }
+  }
+
+  .info-project {
+    background-color: #373737;
+    padding: 20px 0px;
+    width: 100%;
+    margin: 0 auto;
+    position: absolute;
+    top: -1000%;
+    z-index: 1;
+    transition: all 1s ease;
+
+    & .container {
+      width: 50%;
+
+
+    }
+
+    &[data-show="true"] {
+      top: 64px;
+      border-top: 1px solid #fff;
+    }
+  }
+
+  .info {
+    position: relative;
+    cursor: pointer;
+
+    &-mark {
+      display: inline-block;
+      color: #fff;
+      transition: all 0.8s ease;
+
+      &[data-show="false"] {
+        transform: rotate(90deg);
+      }
+
+      &[data-show="true"] {
+        transform: rotate(-90deg);
+      }
+    }
+
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+  .header {
+    & .h-container {
+      padding: 20px;
+    }
+
+    & .info-project .container {
+      width: 100%;
+    }
+  }
+
+}

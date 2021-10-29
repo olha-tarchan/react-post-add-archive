@@ -1,3 +1,49 @@
-.archive {
-    background-color: #c8dbda;
+.page {
+    padding-top: 80px;
+}
+
+table tr {
+    background-color: #eef5fd;
+}
+
+table tr:nth-child(2n) {
+    background-color: #f6f6f6;
+}
+
+.form {
+    padding: 30px 0;
+    margin: 0 0 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #cccccc;
+}
+
+.form .f-title {
+    padding: 0 20px;
+    font-size: 20px;
+    color: #7a7a7a;
+}
+
+.form .f-btn {
+    margin: 0;
+    font-size: 30px;
+    background-color: #288efb;
+    color: #ffffff;
+    padding: 0px 15px 3px 15px;
+}
+
+button, .btn-success {
+    color: #fff;
+    background-color: #288efb;
+    border-color: #288efb;
+}
+
+button:hover, .btn-success:hover {
+    background-color: #0664c4;
+    border-color: #0664c4;
+}
+
+.text-primary, input {
+    cursor: pointer;
 }
